@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("BasicAudio")> 
 <Assembly: AssemblyDescription("Basic Audio Recording")> 
 <Assembly: AssemblyCompany("http://www.blakepell.com")> 
-<Assembly: AssemblyProduct("BasicAudio")> 
-<Assembly: AssemblyCopyright("Copyright ©  2007-2015")> 
+<Assembly: AssemblyProduct("BasicAudio")>
+<Assembly: AssemblyCopyright("Copyright ©  2007-2016")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
