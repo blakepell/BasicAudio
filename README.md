@@ -7,8 +7,16 @@ those that just want to incorporate playback/recording with minimal code or lear
 
 If you need advanced recording and audio features I highly recommend [NAudio](https://github.com/naudio/NAudio).
 
-Basic audio was originally written in Visual Basic but is now built off of C#.  The Visual Basic version has
-been left in this project for posterity.
+Basic audio was originally written in Visual Basic but is is now built off of C#.  The Visual Basic 
+version has been left in this project for posterity.
+
+The library provides its functionality through the mciSendString Windows API and thus binds it desktop
+use cases. The playback features support wave files and mp3 files and the recoding supports wave files. 
+The class library contains 3 classes, one for playback, one for recording and one that is an MCI 
+error messages (there's an official API for this that I'll use in the future). The classes have 
+been kept slim to facilitate ease of use. If you're looking for very detailed recording objects 
+you'll want to consider another framework such as [NAudio](https://github.com/naudio/NAudio). Note 
+that this records through whatever the currently selected recording device is in Windows.
 
 ## OS Support
 
@@ -37,15 +45,6 @@ been left in this project for posterity.
 - .Net Framework 4
 - .Net Framework 3.5
 
-These classes provide most of their functionality through the mciSendString Windows API.
-The playback features support wave files and mp3 files and the recoding supports wave files. 
-The class library contains 3 classes, one for playback, one for recording and one that is an MCI 
-error messages (there's an official API for this that I'll use in the future). The classes have 
-been kept slim to facilitate ease of use. If you're looking for very detailed recording objects 
-you'll want to consider another framework such as [NAudio](https://github.com/naudio/NAudio) but for 
-basic recording tasks this works very well. Note that it records through whatever the currently 
-selected play back device is in Windows.
-
 ## Basic Start Recording Example
 
 ##### C#
@@ -72,6 +71,7 @@ audioRecorder.StartRecording()
 ##### C#
 
 ```csharp
+// File is written out to disk when this is called.  The filename property must already be set.
 audioRecorder.StopRecording();
 ```
 
