@@ -1,4 +1,8 @@
-# BasicAudio
+# Basic Audio
+
+[![NuGet version (BasicAudio)](https://img.shields.io/badge/nuget-v2019.4.5.1-blue.svg?style=flat-square)](https://www.nuget.org/packages/BasicAudio/)
+[![NuGet version (BasicAudio)](https://img.shields.io/github/license/blakepell/basicaudio.svg?style=flat-square)](https://github.com/blakepell/BasicAudio/blob/master/LICENSE)
+
 Basic audio is a class library with a test project (audio player/recorder) to faciliate basic audio 
 playing and recording. There are other frameworks available to give you very detailed and complex 
 audio functionality, this one aims to provide only the basic playback / record methods or provide light
