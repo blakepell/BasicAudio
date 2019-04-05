@@ -32,24 +32,24 @@ that this records through whatever the currently selected recording device is in
 
 ## .Net Framework Support
 
-- .Net Standard 2.0
-- .Net Standard 1.6
-- .Net Standard 1.5
-- .Net Standard 1.4
-- .Net Standard 1.3
-- .Net Framework 4.7.2
-- .Net Framework 4.7.1
-- .Net Framework 4.7
-- .Net Framework 4.6.2
-- .Net Framework 4.6.1
-- .Net Framework 4.6
-- .Net Framework 4.5.2
-- .Net Framework 4.5.1
-- .Net Framework 4.5
-- .Net Framework 4
-- .Net Framework 3.5
+- .NET Standard 2.0
+- .NET Standard 1.6
+- .NET Standard 1.5
+- .NET Standard 1.4
+- .NET Standard 1.3
+- .NET Framework 4.7.2
+- .NET Framework 4.7.1
+- .NET Framework 4.7
+- .NET Framework 4.6.2
+- .NET Framework 4.6.1
+- .NET Framework 4.6
+- .NET Framework 4.5.2
+- .NET Framework 4.5.1
+- .NET Framework 4.5
+- .NET Framework 4
+- .NET Framework 3.5
 
-## Basic Start Recording Example
+## Start Recording Example
 
 ##### C#
 
@@ -70,7 +70,7 @@ audioRecorder.StartRecording()
 ```
 <br />
 
-## Basic Stop Recording Example
+## Stop Recording Example
 
 ##### C#
 
@@ -88,7 +88,7 @@ audioRecorder.StopRecording()
 
 <br />
 
-## Basic Playback Example
+## Playback Example
 
 ##### C#
 
@@ -108,7 +108,7 @@ audioPlayer.Play()    ' Pause and Stop methods available
 
 <br />
 
-## Basic Stop Recording Example
+## Stop Recording Example
 
 ##### C#
 
