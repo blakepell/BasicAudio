@@ -5,18 +5,22 @@
     <Version>2019.4.5.1</Version>
     <Authors>Blake Pell</Authors>
     <Company>http://www.blakepell.com</Company>
-    <Description>Basic audio recording for Windows desktop applications.  Although .Net Standard compliant requires Windows API's for audio recording and playback.</Description>
+    <Description>Basic audio recording for Windows desktop applications.  Although .NET Standard compliant requires Windows API's for audio recording and playback.</Description>
     <Copyright>Copyright ©  2007-2019</Copyright>
     <PackageProjectUrl>https://github.com/blakepell/BasicAudio</PackageProjectUrl>
     <RepositoryUrl>https://github.com/blakepell/BasicAudio</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>Basic Audio</Title>
     <PackageReleaseNotes>Version 2019.4.5.1
 
-- Support for .Net Standard 1.3-2.0
-- Support for .Net Frameworks 3.5-4.7.2
+- Support for .NET Standard 1.3-2.0
+- Support for .NET Frameworks 3.5-4.7.2
 - Recording and Playback relies on the Windows API and thus not suited for UWP or non Windows desktop development.</PackageReleaseNotes>
     <PackageTags>audio sound mp3 wav</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageIconUrl>https://raw.githubusercontent.com/blakepell/BasicAudio/master/BasicAudio/Assets/audio-file-64.png</PackageIconUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
