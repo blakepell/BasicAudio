@@ -118,9 +118,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BasicAudio.VisualBasic\BasicAudio.VisualBasic.vbproj">
-      <Project>{5bdf22b9-df92-4f0b-83e2-e527a6b74fd6}</Project>
-      <Name>BasicAudio.VisualBasic</Name>
+    <ProjectReference Include="..\BasicAudio\BasicAudio.csproj">
+      <Project>{b154fc05-4592-4cac-bdfd-d76e5770432b}</Project>
+      <Name>BasicAudio</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -1,7 +1,7 @@
 ﻿Public Class BasicAudioConsole
 
-    Private _audioRecorder As New Argus.Audio.Recording()
-    Private _audioPlayer As New Argus.Audio.AudioFile()
+    Private _audioRecorder As New BasicAudio.Recording()
+    Private _audioPlayer As New BasicAudio.AudioPlayer()
 
     Private Sub BasicAudioConsole_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -107,7 +107,7 @@
 
         If _audioRecorder.IsRecording = True Then
             lblStatus.Text = "Recording:  " & FormatNumber(_audioRecorder.TimeElapsed / 1000, 2, TriState.True, TriState.False, TriState.True) & " seconds"
-            lblBytesInMemory.Text = FormatNumber(_audioRecorder.BytesInMemory.Trim, 0, TriState.True, TriState.False, TriState.True)
+            lblBytesInMemory.Text = FormatNumber(_audioRecorder.BytesInMemory.ToString.Trim, 0, TriState.True, TriState.False, TriState.True)
         End If
 
     End Sub
