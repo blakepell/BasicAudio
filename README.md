@@ -51,19 +51,19 @@ selected play back device is in Windows.
 ##### C#
 
 ```csharp
-    // There are properties on this object to change the quality recording
-    var audioRecorder = new BasicAudio.Recording();
-    audioRecorder.Filename = @"c:\test.wav";
-    audioRecorder.StartRecording();
+// There are properties on this object to change the quality recording
+var audioRecorder = new BasicAudio.Recording();
+audioRecorder.Filename = @"c:\test.wav";
+audioRecorder.StartRecording();
 ```
 
 ##### VB.Net
 
 ```vbnet
-    ' There are properties on this object to change the quality recording
-    Dim audioRecorder As New BasicAudio.Recording()
-    audioRecorder.Filename = "c:\test.wav"
-    audioRecorder.StartRecording()   
+' There are properties on this object to change the quality recording
+Dim audioRecorder As New BasicAudio.Recording()
+audioRecorder.Filename = "c:\test.wav"
+audioRecorder.StartRecording()   
 ```
 <br />
 
@@ -72,14 +72,14 @@ selected play back device is in Windows.
 ##### C#
 
 ```csharp
-    audioRecorder.StopRecording();
+audioRecorder.StopRecording();
 ```
 
 ##### VB.Net
 
 ```vbnet
-    ' File is written out to disk when this is called.  The filename property must already be set.
-    audioRecorder.StopRecording()
+' File is written out to disk when this is called.  The filename property must already be set.
+audioRecorder.StopRecording()
 ```
 
 <br />
@@ -89,17 +89,17 @@ selected play back device is in Windows.
 ##### C#
 
 ```csharp
-    var audioPlayer = new BasicAudio.AudioPlayer();
-    audioPlayer.Filename = @"c:\test.mp3";
-    audioPlayer.Play();
+var audioPlayer = new BasicAudio.AudioPlayer();
+audioPlayer.Filename = @"c:\test.mp3";
+audioPlayer.Play();
 ```
 
 ##### VB.Net
 
 ```vbnet
-    Dim audioPlayer As New BasicAudio.AudioPlayer()
-    audioPlayer.Filename = "c:\test.mp3"
-    audioPlayer.Play()    ' Pause and Stop methods available
+Dim audioPlayer As New BasicAudio.AudioPlayer()
+audioPlayer.Filename = "c:\test.mp3"
+audioPlayer.Play()    ' Pause and Stop methods available
 ```
 
 <br />
@@ -109,13 +109,13 @@ selected play back device is in Windows.
 ##### C#
 
 ```csharp
-    // File is written out to disk when this is called.  The filename property must already be set.
-    audioRecorder.StopRecording();
+// File is written out to disk when this is called.  The filename property must already be set.
+audioRecorder.StopRecording();
 ```
 
 ##### VB.Net
 
 ```vbnet
-    ' File is written out to disk when this is called.  The filename property must already be set.
-    audioRecorder.StopRecording()
+' File is written out to disk when this is called.  The filename property must already be set.
+audioRecorder.StopRecording()
 ```
