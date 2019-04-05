@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BasicAudio.VisualBasic", "BasicAudio\BasicAudio.VisualBasic.vbproj", "{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TestApplication", "TestApplication\TestApplication.vbproj", "{AC190BF3-43B6-4BA9-8E35-D74DE759691C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{039645BE-6273-427E-A781-6B5896495A42}"
@@ -12,20 +10,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BasicAudio.VisualBasic", "BasicAudio.VisualBasic\BasicAudio.VisualBasic.vbproj", "{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AC190BF3-43B6-4BA9-8E35-D74DE759691C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AC190BF3-43B6-4BA9-8E35-D74DE759691C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC190BF3-43B6-4BA9-8E35-D74DE759691C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC190BF3-43B6-4BA9-8E35-D74DE759691C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

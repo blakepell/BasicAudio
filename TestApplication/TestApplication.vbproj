@@ -118,7 +118,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BasicAudio\BasicAudio.VisualBasic.vbproj">
+    <ProjectReference Include="..\BasicAudio.VisualBasic\BasicAudio.VisualBasic.vbproj">
       <Project>{5bdf22b9-df92-4f0b-83e2-e527a6b74fd6}</Project>
       <Name>BasicAudio.VisualBasic</Name>
     </ProjectReference>
