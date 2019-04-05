@@ -12,13 +12,13 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Basic Audio Recording")> 
 <Assembly: AssemblyCompany("http://www.blakepell.com")> 
 <Assembly: AssemblyProduct("BasicAudio")>
-<Assembly: AssemblyCopyright("Copyright ©  2007-2016")>
+<Assembly: AssemblyCopyright("Copyright ©  2007-2019")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("147aa4cd-92d5-48b5-a4bf-ef59ec72288e")> 
+<Assembly: Guid("147aa4cd-92d5-48b5-a4bf-ef59ec72288e")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.2.0.0")> 
-<Assembly: AssemblyFileVersion("1.2.0.0")> 
+<Assembly: AssemblyVersion("1.3.0.0")>
+<Assembly: AssemblyFileVersion("1.3.0.0")>

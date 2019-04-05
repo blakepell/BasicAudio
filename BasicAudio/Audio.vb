@@ -14,7 +14,9 @@ Namespace Argus.Audio
     ''' VB Usage:
     '''    Dim recorder As New Argus.Audio.Recording("C:\test.wav")
     '''    recorder.StartRecording  ' to stop, invoke the StopRecording sub
-    '''
+    ''' C# usage:
+    '''    var recorder = new Argus.Audio.Recording(@"C:\test.wav");
+    '''    recorder.StartRecording();
     ''' </remarks>
     Public Class Recording
 
@@ -23,7 +25,7 @@ Namespace Argus.Audio
         '             Class:  Recording
         '      Organization:  http://www.blakepell.com     
         '      Initial Date:  03/31/2007
-        '      Last Updated:  01/30/2015
+        '      Last Updated:  04/05/2019
         '     Programmer(s):  Blake Pell, blakepell@hotmail.com
         '
         '*********************************************************************************************************************
@@ -32,7 +34,7 @@ Namespace Argus.Audio
         Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uReturnLength As Int32, ByVal hwndCallback As Int32) As Int32
         Private Declare Function waveOutGetNumDevs Lib "winmm.dll" () As Integer
 
-        Private _timeElapsed As New System.Diagnostics.Stopwatch()
+        Private _timeElapsed As New Stopwatch()
 
         ''' <summary>
         ''' Constructor:  The WavFileName initializes the file that should be saved when the stop method is called.
@@ -56,10 +58,6 @@ Namespace Argus.Audio
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub StartRecording()
-            Dim returnValue As Integer = 0
-            Dim averageBytes As Integer = 0
-            Dim alignment As Integer = 0
-            Dim command As String = ""
 
             If IsRecording = True Then
                 Throw New Exception("You are already recording.")
@@ -67,23 +65,24 @@ Namespace Argus.Audio
             End If
 
             'Calculate the average bytes/sec and block alignment  
-            averageBytes = _bitsPerSample * _channels * _samplesPerSecond / 8
-            alignment = _bitsPerSample * _channels / 8
+            Dim averageBytes As Integer = BitsPerSample * Channels * SamplesPerSecond / 8
+            Dim alignment As Integer = BitsPerSample * Channels / 8
 
             'Even though MCI's documentation does not mention these need to be set in a certain order, I've found that if  
             'the below order is not used, the function will fail.  
 
             ' I tried to use a string builder here but it kept pulling the text from the enum and not the value.  :P
-            command = "set capture bitspersample " & _bitsPerSample & " channels " & _channels
-            command += " alignment " & alignment & " samplespersec " & _samplesPerSecond & " bytespersec " & averageBytes
+            Dim command As String = "set capture bitspersample " & BitsPerSample & " channels " & Channels
+
+            command += " alignment " & alignment & " samplespersec " & SamplesPerSecond & " bytespersec " & averageBytes
             command += " format tag pcm wait"
 
-            returnValue = mciSendString("close capture", 0&, 0, 0)
+            Dim returnValue As Integer = mciSendString("close capture", 0&, 0, 0)
             returnValue = mciSendString("open new type waveaudio alias capture", 0&, 0, 0)
             returnValue = mciSendString(command, 0&, 0, 0)
             returnValue = mciSendString("record capture", 0&, 0, 0)
 
-            _isRecording = True
+            IsRecording = True
 
             _timeElapsed.Reset()
             _timeElapsed.Start()
@@ -95,16 +94,14 @@ Namespace Argus.Audio
         ''' </summary>
         ''' <remarks></remarks>
         Public Sub StopRecording()
-            Dim returnValue As Int32 = 0
-
             If _filename = "" Then
                 Throw New Exception("No file specified to save to.")
             End If
 
-            returnValue = mciSendString("stop capture", 0&, 0, 0)
+            Dim returnValue As Integer = mciSendString("stop capture", 0&, 0, 0)
             returnValue = mciSendString("save capture " & _filename, 0&, 0, 0)
             returnValue = mciSendString("close capture", 0&, 0, 0)
-            _isRecording = False
+            IsRecording = False
 
             _timeElapsed.Stop()
         End Sub
@@ -136,7 +133,7 @@ Namespace Argus.Audio
                 Return _isPaused
             End Get
             Set(ByVal value As Boolean)
-                If _isRecording = False Then
+                If IsRecording = False Then
                     _isPaused = False
                     Exit Property
                 End If
@@ -164,22 +161,13 @@ Namespace Argus.Audio
             MONO = 1
             STEREO = 2
         End Enum
-
-        Private _channels As ChannelValue = ChannelValue.STEREO
         ''' <summary>
         ''' The channel property.  The default value is stereo.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property Channels() As ChannelValue
-            Get
-                Return _channels
-            End Get
-            Set(ByVal value As ChannelValue)
-                _channels = value
-            End Set
-        End Property
+        Public Property Channels() As ChannelValue = ChannelValue.STEREO
 
         ''' <summary>
         ''' Samples per second values.  The current supported values are 11025, 22050 and 44100 (Low, Medium and High)
@@ -190,22 +178,13 @@ Namespace Argus.Audio
             MEDIUM = 22050
             HIGH = 44100
         End Enum
-
-        Private _samplesPerSecond As SamplesPerSecValue = SamplesPerSecValue.HIGH
         ''' <summary>
         ''' The samples per second property.  The default value is high or 44100 samples per second (CD Quality).
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property SamplesPerSecond() As SamplesPerSecValue
-            Get
-                Return _samplesPerSecond
-            End Get
-            Set(ByVal value As SamplesPerSecValue)
-                _samplesPerSecond = value
-            End Set
-        End Property
+        Public Property SamplesPerSecond() As SamplesPerSecValue = SamplesPerSecValue.HIGH
 
         ''' <summary>
         ''' The bits per second value
@@ -216,21 +195,13 @@ Namespace Argus.Audio
             HIGH = 16
         End Enum
 
-        Private _bitsPerSample As BitsPerSampleValue = BitsPerSampleValue.HIGH
         ''' <summary>
         ''' The bits per second property.  The default value is high or 16-bit.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property BitsPerSample() As BitsPerSampleValue
-            Get
-                Return _bitsPerSample
-            End Get
-            Set(ByVal value As BitsPerSampleValue)
-                _bitsPerSample = value
-            End Set
-        End Property
+        Public Property BitsPerSample() As BitsPerSampleValue = BitsPerSampleValue.HIGH
 
         Private _filename As String = ""
         ''' <summary>
@@ -248,7 +219,7 @@ Namespace Argus.Audio
             Set(ByVal value As String)
                 ' Check if we should force putting the .wav extension on the file, but allow the user
                 ' to disable this if they want
-                If _forceExtension = True Then
+                If ForceExtension = True Then
                     If value.Length > 4 And Right(value.ToLower, 4) <> ".wav" Then
                         value = value & ".wav"
                     End If
@@ -257,8 +228,6 @@ Namespace Argus.Audio
                 _filename = value
             End Set
         End Property
-
-        Private _forceExtension As Boolean = True
         ''' <summary>
         ''' A property that determines whether the class will force the file to have the .wav extension (it will add it if you don't).  The default
         ''' value for this is true.
@@ -266,14 +235,7 @@ Namespace Argus.Audio
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property ForceExtension() As Boolean
-            Get
-                Return _forceExtension
-            End Get
-            Set(ByVal value As Boolean)
-                _forceExtension = value
-            End Set
-        End Property
+        Public Property ForceExtension() As Boolean = True
 
         ''' <summary>
         ''' The time elapsed on the current recording.
@@ -298,6 +260,7 @@ Namespace Argus.Audio
             Get
                 Dim buf As String = ""
                 Dim returnValue As Integer = 0
+
                 buf = Space(255)
                 returnValue = mciSendString("set capture time format bytes", 0&, 0, 0)
                 returnValue = mciSendString("status capture length", buf, 255, 0)
@@ -305,21 +268,13 @@ Namespace Argus.Audio
             End Get
         End Property
 
-        Private _isRecording As Boolean = False
         ''' <summary>
         ''' Whether or not the class is currently recording.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsRecording() As Boolean
-            Get
-                Return _isRecording
-            End Get
-            Set(ByVal value As Boolean)
-                _isRecording = value
-            End Set
-        End Property
+        Public Property IsRecording() As Boolean = False
 
     End Class
 
@@ -349,7 +304,7 @@ Namespace Argus.Audio
         ''' <param name="Location"></param>
         ''' <remarks></remarks>
         Public Sub New(ByVal location As String)
-            Me.Filename = location            
+            Me.Filename = location
         End Sub
 
         ''' <summary>
@@ -374,7 +329,7 @@ Namespace Argus.Audio
 
                     Dim playCommand As String = "play audiofile from 0"
 
-                    If _wait = True Then playCommand += " wait"
+                    If Wait = True Then playCommand += " wait"
 
                     mciSendString(playCommand, Nothing, 0, IntPtr.Zero)
                 Case "wav"
@@ -428,7 +383,6 @@ Namespace Argus.Audio
             mciSendString("close audiofile", Nothing, 0, IntPtr.Zero)
         End Sub
 
-        Private _wait As Boolean = False
         ''' <summary>
         ''' Halt the program until the .wav file is done playing.  Be careful, this will lock the entire program up until the
         ''' file is done playing.  It behaves as if the Windows Sleep API is called while the file is playing (and maybe it is, I don't
@@ -437,14 +391,7 @@ Namespace Argus.Audio
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property Wait() As Boolean
-            Get
-                Return _wait
-            End Get
-            Set(ByVal value As Boolean)
-                _wait = value
-            End Set
-        End Property
+        Public Property Wait() As Boolean = False
 
         ''' <summary>
         ''' Sets the audio file's time format via the mciSendString API.
@@ -532,22 +479,13 @@ Namespace Argus.Audio
                 Return Str(buf)
             End Get
         End Property
-
-        Private _isPaused As Boolean = False
         ''' <summary>
         ''' Whether or not the current playback is paused.
         ''' </summary>
         ''' <value></value>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Property IsPaused() As Boolean
-            Get
-                Return _isPaused
-            End Get
-            Set(ByVal value As Boolean)
-                _isPaused = value
-            End Set
-        End Property
+        Public Property IsPaused() As Boolean = False
 
         Private _filename As String
         ''' <summary>
