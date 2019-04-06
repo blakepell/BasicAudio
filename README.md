@@ -68,8 +68,6 @@ Dim audioRecorder As New BasicAudio.Recording()
 audioRecorder.Filename = "c:\test.wav"
 audioRecorder.StartRecording()   
 ```
-<br />
-
 ## Stop Recording Example
 
 ##### C#
@@ -85,9 +83,6 @@ audioRecorder.StopRecording();
 ' File is written out to disk when this is called.  The filename property must already be set.
 audioRecorder.StopRecording()
 ```
-
-<br />
-
 ## Playback Example
 
 ##### C#
@@ -105,9 +100,6 @@ Dim audioPlayer As New BasicAudio.AudioPlayer()
 audioPlayer.Filename = "c:\test.mp3"
 audioPlayer.Play()    ' Pause and Stop methods available
 ```
-
-<br />
-
 ## Stop Recording Example
 
 ##### C#
@@ -116,7 +108,6 @@ audioPlayer.Play()    ' Pause and Stop methods available
 // File is written out to disk when this is called.  The filename property must already be set.
 audioRecorder.StopRecording();
 ```
-
 ##### VB.Net
 
 ```vbnet
