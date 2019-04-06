@@ -123,3 +123,8 @@ audioRecorder.StopRecording();
 ' File is written out to disk when this is called.  The filename property must already be set.
 audioRecorder.StopRecording()
 ```
+## Troubleshooting
+
+On some systems latency might be an issue due to installed audio drivers.  If this occurs and 
+your sound card support ASIO drivers then it might be worth it to research [ASIO for all](http://www.asio4all.org/).  I
+have used this on two systems in the past with success in mitigating any lag.
