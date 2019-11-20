@@ -113,7 +113,7 @@
     End Sub
 
     Private Sub PlaybackTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PlaybackTimer.Tick
-        lblStatus.Text = _audioPlayer.Status.Trim & " Total Time: " & FormatNumber(_audioPlayer.Milleseconds / 1000, 2, TriState.True, TriState.False, TriState.True) & " seconds"
+        lblStatus.Text = _audioPlayer.Status.Trim & " Total Time: " & FormatNumber(_audioPlayer.Milliseconds / 1000, 2, TriState.True, TriState.False, TriState.True) & " seconds"
         lblBytesInMemory.Text = FormatNumber(_audioPlayer.FileSize, 0, TriState.True, TriState.False, TriState.True)
     End Sub
 

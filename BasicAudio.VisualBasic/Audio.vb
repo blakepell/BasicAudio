@@ -1,22 +1,20 @@
 Namespace Argus.Audio
 
     ''' <summary>
-    ''' Recording via the current audio device
+    '''     Recording via the current audio device
     ''' </summary>
     ''' <remarks>
-    ''' This has been updated to work with Vista's updated mciSendString API's (the legacy call
-    ''' continued to work but would only record 8bit 11kpbs which is horrible quality, had to add
-    ''' the alignment, samplespersec and bytespersec in that particular order to get it to work
-    ''' as per the only single post I could find on the web that had content that fixed the issue).
-    '''
-    ''' If any latency issues occur, look into whether your sound card supports ASIO drivers. 
-    ''' 
-    ''' VB Usage:
-    '''    Dim recorder As New Argus.Audio.Recording("C:\test.wav")
-    '''    recorder.StartRecording  ' to stop, invoke the StopRecording sub
-    ''' C# usage:
-    '''    var recorder = new Argus.Audio.Recording(@"C:\test.wav");
-    '''    recorder.StartRecording();
+    '''     This has been updated to work with Vista's updated mciSendString API's (the legacy call
+    '''     continued to work but would only record 8bit 11kpbs which is horrible quality, had to add
+    '''     the alignment, samplespersec and bytespersec in that particular order to get it to work
+    '''     as per the only single post I could find on the web that had content that fixed the issue).
+    '''     If any latency issues occur, look into whether your sound card supports ASIO drivers.
+    '''     VB Usage:
+    '''     Dim recorder As New Argus.Audio.Recording("C:\test.wav")
+    '''     recorder.StartRecording  ' to stop, invoke the StopRecording sub
+    '''     C# usage:
+    '''     var recorder = new Argus.Audio.Recording(@"C:\test.wav");
+    '''     recorder.StartRecording();
     ''' </remarks>
     Public Class Recording
 
@@ -25,38 +23,37 @@ Namespace Argus.Audio
         '             Class:  Recording
         '      Organization:  http://www.blakepell.com     
         '      Initial Date:  03/31/2007
-        '      Last Updated:  04/05/2019
+        '      Last Updated:  11/19/2019
         '     Programmer(s):  Blake Pell, blakepell@hotmail.com
         '
         '*********************************************************************************************************************
 
         ' Windows API Calls
-        Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uReturnLength As Int32, ByVal hwndCallback As Int32) As Int32
+        Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (lpstrCommand As String,
+                                                                                      lpstrReturnString As String,
+                                                                                      uReturnLength As Int32,
+                                                                                      hwndCallback As Int32) As Int32
         Private Declare Function waveOutGetNumDevs Lib "winmm.dll" () As Integer
 
-        Private _timeElapsed As New Stopwatch()
+        Private ReadOnly _timeElapsed As New Stopwatch()
 
         ''' <summary>
-        ''' Constructor:  The WavFileName initializes the file that should be saved when the stop method is called.
+        '''     Constructor:  The WavFileName initializes the file that should be saved when the stop method is called.
         ''' </summary>
         ''' <param name="WavFileName">This is the file that will be saved when the StopRecording method is called.</param>
-        ''' <remarks></remarks>
-        Public Sub New(ByVal wavFileName As String)
+        Public Sub New(wavFileName As String)
             Me.Filename = wavFileName
         End Sub
 
         ''' <summary>
-        ''' Constructor:  If you use the blank constructor you will need to set the wave filename manually before you stop recording.
+        '''     Constructor:  If you use the blank constructor you will need to set the wave filename manually before you stop recording.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub New()
-
         End Sub
 
         ''' <summary>
-        ''' Start recording
+        '''     Start recording
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub StartRecording()
 
             If IsRecording = True Then
@@ -86,13 +83,11 @@ Namespace Argus.Audio
 
             _timeElapsed.Reset()
             _timeElapsed.Start()
-
         End Sub
 
         ''' <summary>
-        ''' Stop recording.  This will also save the file to disk that was previously specified (or should have been previously specified).  
+        '''     Stop recording.  This will also save the file to disk that was previously specified (or should have been previously specified).
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub StopRecording()
             If _filename = "" Then
                 Throw New Exception("No file specified to save to.")
@@ -107,10 +102,8 @@ Namespace Argus.Audio
         End Sub
 
         ''' <summary>
-        ''' Whether or not a sound card exists.
+        '''     Whether or not a sound card exists.
         ''' </summary>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
         Public Function SoundCardExist() As Boolean
             Dim waveOutDevices As Integer = waveOutGetNumDevs()
 
@@ -122,144 +115,121 @@ Namespace Argus.Audio
         End Function
 
         Private _isPaused As Boolean = False
+
         ''' <summary>
-        ''' Gets or sets whether the currently recording is paused or not.
+        '''     Gets or sets whether the currently recording is paused or not.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Property Pause() As Boolean
+        Property Pause As Boolean
             Get
                 Return _isPaused
             End Get
-            Set(ByVal value As Boolean)
+            Set
                 If IsRecording = False Then
                     _isPaused = False
                     Exit Property
                 End If
 
-                _isPaused = value
+                _isPaused = Value
 
                 If _isPaused = True Then
-                    Dim returnValue As Int32 = 0
+                    Dim returnValue = 0
                     returnValue = mciSendString("pause capture", 0&, 0, IntPtr.Zero)
                     _timeElapsed.Stop()
                 Else
-                    Dim returnValue As Int32 = 0
+                    Dim returnValue = 0
                     returnValue = mciSendString("resume capture", 0&, 0, IntPtr.Zero)
                     _timeElapsed.Start()
                 End If
-
             End Set
         End Property
 
         ''' <summary>
-        ''' Channel settings.  Mono and Stereo are the only supported at this time.
+        '''     Channel settings.  Mono and Stereo are the only supported at this time.
         ''' </summary>
-        ''' <remarks></remarks>
         Enum ChannelValue
             MONO = 1
             STEREO = 2
         End Enum
-        ''' <summary>
-        ''' The channel property.  The default value is stereo.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property Channels() As ChannelValue = ChannelValue.STEREO
 
         ''' <summary>
-        ''' Samples per second values.  The current supported values are 11025, 22050 and 44100 (Low, Medium and High)
+        '''     The channel property.  The default value is stereo.
         ''' </summary>
-        ''' <remarks></remarks>
+        Public Property Channels As ChannelValue = ChannelValue.STEREO
+
+        ''' <summary>
+        '''     Samples per second values.  The current supported values are 11025, 22050 and 44100 (Low, Medium and High)
+        ''' </summary>
         Enum SamplesPerSecValue
             LOW = 11025
             MEDIUM = 22050
             HIGH = 44100
         End Enum
-        ''' <summary>
-        ''' The samples per second property.  The default value is high or 44100 samples per second (CD Quality).
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property SamplesPerSecond() As SamplesPerSecValue = SamplesPerSecValue.HIGH
 
         ''' <summary>
-        ''' The bits per second value
+        '''     The samples per second property.  The default value is high or 44100 samples per second (CD Quality).
         ''' </summary>
-        ''' <remarks></remarks>
+        Public Property SamplesPerSecond As SamplesPerSecValue = SamplesPerSecValue.HIGH
+
+        ''' <summary>
+        '''     The bits per second value
+        ''' </summary>
         Enum BitsPerSampleValue
             LOW = 8
             HIGH = 16
         End Enum
 
         ''' <summary>
-        ''' The bits per second property.  The default value is high or 16-bit.
+        '''     The bits per second property.  The default value is high or 16-bit.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property BitsPerSample() As BitsPerSampleValue = BitsPerSampleValue.HIGH
+        Public Property BitsPerSample As BitsPerSampleValue = BitsPerSampleValue.HIGH
 
         Private _filename As String = ""
+
         ''' <summary>
-        ''' The filename property.  This is the file that will be saved to whenever the StopRecording method is called.  If the
-        ''' ForceExtension property is set to true (which it is be default) then it will force the filename to have the proper .wav 
-        ''' extension.
+        '''     The filename property.  This is the file that will be saved to whenever the StopRecording method is called.  If the
+        '''     ForceExtension property is set to true (which it is be default) then it will force the filename to have the proper .wav
+        '''     extension.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property Filename() As String
+        Public Property Filename As String
             Get
                 Return _filename
             End Get
-            Set(ByVal value As String)
+            Set
                 ' Check if we should force putting the .wav extension on the file, but allow the user
                 ' to disable this if they want
                 If ForceExtension = True Then
-                    If value.Length > 4 And Right(value.ToLower, 4) <> ".wav" Then
-                        value = value & ".wav"
+                    If Value.Length > 4 And Right(Value.ToLower, 4) <> ".wav" Then
+                        Value = Value & ".wav"
                     End If
                 End If
 
-                _filename = value
+                _filename = Value
             End Set
         End Property
-        ''' <summary>
-        ''' A property that determines whether the class will force the file to have the .wav extension (it will add it if you don't).  The default
-        ''' value for this is true.
-        ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property ForceExtension() As Boolean = True
 
         ''' <summary>
-        ''' The time elapsed on the current recording.
+        '''     A property that determines whether the class will force the file to have the .wav extension (it will add it if you don't).  The default
+        '''     value for this is true.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public ReadOnly Property TimeElapsed() As Long
+        Public Property ForceExtension As Boolean = True
+
+        ''' <summary>
+        '''     The time elapsed on the current recording.
+        ''' </summary>
+        Public ReadOnly Property TimeElapsed As Long
             Get
                 Return _timeElapsed.ElapsedMilliseconds
             End Get
         End Property
 
         ''' <summary>
-        ''' The current number of bytes that are stored in memory.  This property obtains it's value by making a call to the
-        ''' Windows API mciSendString.
+        '''     The current number of bytes that are stored in memory.  This property obtains it's value by making a call to the
+        '''     Windows API mciSendString.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public ReadOnly Property BytesInMemory() As String
+        Public ReadOnly Property BytesInMemory As String
             Get
-                Dim buf As String = ""
-                Dim returnValue As Integer = 0
+                Dim buf = ""
+                Dim returnValue = 0
 
                 buf = Space(255)
                 returnValue = mciSendString("set capture time format bytes", 0&, 0, 0)
@@ -269,20 +239,14 @@ Namespace Argus.Audio
         End Property
 
         ''' <summary>
-        ''' Whether or not the class is currently recording.
+        '''     Whether or not the class is currently recording.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property IsRecording() As Boolean = False
-
+        Public Property IsRecording As Boolean = False
     End Class
 
     ''' <summary>
-    ''' This class is a wrapper for the Windows API calls to play wave, midi or mp3 files.
+    '''     This class is a wrapper for the Windows API calls to play wave, midi or mp3 files.
     ''' </summary>
-    ''' <remarks>
-    ''' </remarks>
     Public Class AudioFile
 
         '*********************************************************************************************************************
@@ -296,29 +260,28 @@ Namespace Argus.Audio
         '*********************************************************************************************************************
 
         ' Windows API Declarations
-        Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uReturnLength As Int32, ByVal hwndCallback As Int32) As Int32
+        Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (lpstrCommand As String,
+                                                                                      lpstrReturnString As String,
+                                                                                      uReturnLength As Int32,
+                                                                                      hwndCallback As Int32) As Int32
 
         ''' <summary>
-        ''' Constructor:  Location is the filename of the media to play.  Wave files and Mp3 files are the supported formats.
+        '''     Constructor:  Location is the filename of the media to play.  Wave files and Mp3 files are the supported formats.
         ''' </summary>
         ''' <param name="Location"></param>
-        ''' <remarks></remarks>
-        Public Sub New(ByVal location As String)
+        Public Sub New(location As String)
             Me.Filename = location
         End Sub
 
         ''' <summary>
-        ''' Constructor
+        '''     Constructor
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub New()
-
         End Sub
 
         ''' <summary>
-        ''' Plays the file that is specified as the filename.
+        '''     Plays the file that is specified as the filename.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub Play()
 
             If _filename = "" Or Filename.Length <= 4 Then Exit Sub
@@ -327,7 +290,7 @@ Namespace Argus.Audio
                 Case "mp3"
                     mciSendString("open """ & _filename & """ type mpegvideo alias audiofile", Nothing, 0, IntPtr.Zero)
 
-                    Dim playCommand As String = "play audiofile from 0"
+                    Dim playCommand = "play audiofile from 0"
 
                     If Wait = True Then playCommand += " wait"
 
@@ -346,60 +309,49 @@ Namespace Argus.Audio
             End Select
 
             IsPaused = False
-
         End Sub
 
         ''' <summary>
-        ''' Pause the current play back.
+        '''     Pause the current play back.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub Pause()
             mciSendString("pause audiofile", Nothing, 0, IntPtr.Zero)
             IsPaused = True
         End Sub
 
         ''' <summary>
-        ''' Resume the current play back if it is currently paused.
+        '''     Resume the current play back if it is currently paused.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub [Resume]()
             mciSendString("resume audiofile", Nothing, 0, IntPtr.Zero)
             IsPaused = False
         End Sub
 
         ''' <summary>
-        ''' Stop the current file if it's playing.
+        '''     Stop the current file if it's playing.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub [Stop]()
             mciSendString("stop audiofile", Nothing, 0, IntPtr.Zero)
         End Sub
 
         ''' <summary>
-        ''' Close the file.
+        '''     Close the file.
         ''' </summary>
-        ''' <remarks></remarks>
         Public Sub Close()
             mciSendString("close audiofile", Nothing, 0, IntPtr.Zero)
         End Sub
 
         ''' <summary>
-        ''' Halt the program until the .wav file is done playing.  Be careful, this will lock the entire program up until the
-        ''' file is done playing.  It behaves as if the Windows Sleep API is called while the file is playing (and maybe it is, I don't
-        ''' actually know, I'm just theorizing).  :P
+        '''     Halt the program until the .wav file is done playing.  Be careful, this will lock the entire program up until the
+        '''     file is done playing.  It behaves as if the Windows Sleep API is called while the file is playing (and maybe it is, I don't
+        '''     actually know, I'm just theorizing).  :P
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property Wait() As Boolean = False
+        Public Property Wait As Boolean = False
 
         ''' <summary>
-        ''' Sets the audio file's time format via the mciSendString API.
+        '''     Sets the audio file's time format via the mciSendString API.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        ReadOnly Property Milleseconds() As Integer
+        ReadOnly Property Milliseconds As Integer
             Get
                 Dim buf As String = Space(255)
                 mciSendString("set audiofile time format milliseconds", Nothing, 0, IntPtr.Zero)
@@ -416,12 +368,9 @@ Namespace Argus.Audio
         End Property
 
         ''' <summary>
-        ''' Gets the status of the current playback file via the mciSendString API.
+        '''     Gets the status of the current playback file via the mciSendString API.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        ReadOnly Property Status() As String
+        ReadOnly Property Status As String
             Get
                 Dim buf As String = Space(255)
                 mciSendString("status audiofile mode", buf, 255, IntPtr.Zero)
@@ -431,12 +380,9 @@ Namespace Argus.Audio
         End Property
 
         ''' <summary>
-        ''' Gets the file size of the current audio file.
+        '''     Gets the file size of the current audio file.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        ReadOnly Property FileSize() As Integer
+        ReadOnly Property FileSize As Integer
             Get
                 Try
                     Return My.Computer.FileSystem.GetFileInfo(_filename).Length
@@ -447,12 +393,9 @@ Namespace Argus.Audio
         End Property
 
         ''' <summary>
-        ''' Gets the channels of the file via the mciSendString API.
+        '''     Gets the channels of the file via the mciSendString API.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        ReadOnly Property Channels() As Integer
+        ReadOnly Property Channels As Integer
             Get
                 Dim buf As String = Space(255)
                 mciSendString("status audiofile channels", buf, 255, IntPtr.Zero)
@@ -466,12 +409,9 @@ Namespace Argus.Audio
         End Property
 
         ''' <summary>
-        ''' Used for debugging purposes.
+        '''     Used for debugging purposes.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        ReadOnly Property Debug() As String
+        ReadOnly Property Debug As String
             Get
                 Dim buf As String = Space(255)
                 mciSendString("status audiofile channels", buf, 255, IntPtr.Zero)
@@ -479,46 +419,40 @@ Namespace Argus.Audio
                 Return Str(buf)
             End Get
         End Property
+
         ''' <summary>
-        ''' Whether or not the current playback is paused.
+        '''     Whether or not the current playback is paused.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property IsPaused() As Boolean = False
+        Public Property IsPaused As Boolean = False
 
         Private _filename As String
+
         ''' <summary>
-        ''' The current filename of the file that is to be played back.
+        '''     The current filename of the file that is to be played back.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property Filename() As String
+        Public Property Filename As String
             Get
                 Return _filename
             End Get
-            Set(ByVal value As String)
+            Set
 
-                If My.Computer.FileSystem.FileExists(value) = False Then
+                If My.Computer.FileSystem.FileExists(Value) = False Then
                     Throw New Exception("File does not exist.")
                     Exit Property
                 End If
 
-                _filename = value
+                _filename = Value
             End Set
         End Property
-
     End Class
 
     ''' <summary>
-    ''' This is a lookup class to identify the MCI errors that may occur.
+    '''     This is a lookup class to identify the MCI errors that may occur.
     ''' </summary>
     ''' <remarks>
-    ''' There's is an API that will also do this for us, We should consider using that in the future.
+    '''     There's is an API that will also do this for us, We should consider using that in the future.
     ''' </remarks>
     Public Class MCIError
-
         '*********************************************************************************************************************
         '
         '             Class:  MCIError
@@ -530,9 +464,8 @@ Namespace Argus.Audio
         '*********************************************************************************************************************
 
         ''' <summary>
-        ''' The device error enums
+        '''     The device error enums
         ''' </summary>
-        ''' <remarks></remarks>
         Enum MCIERR
             MCIERR_BASE = 256
             MCIERR_INVALID_DEVICE_ID = (MCIERR_BASE + 1)
@@ -613,23 +546,19 @@ Namespace Argus.Audio
         End Enum
 
         ''' <summary>
-        ''' Constructor
+        '''     Constructor
         ''' </summary>
         ''' <param name="errorNumber"></param>
-        ''' <remarks></remarks>
-        Public Sub New(ByVal errorNumber As Integer)
+        Public Sub New(errorNumber As Integer)
             Me.ErrorNumber = errorNumber
         End Sub
 
         ''' <summary>
-        ''' Returns the description for the value set in the ErrorNumber property.
+        '''     Returns the description for the value set in the ErrorNumber property.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Private ReadOnly Property ErrorDescription() As String
+        Private ReadOnly Property ErrorDescription As String
             Get
-                Select Case _errorNumber
+                Select Case ErrorNumber
                     Case MCIERR.MCIERR_BAD_CONSTANT
                         Return "Bad Constant"
                     Case MCIERR.MCIERR_BAD_INTEGER
@@ -788,22 +717,10 @@ Namespace Argus.Audio
             End Get
         End Property
 
-        Private _errorNumber As Integer
         ''' <summary>
-        ''' The error number that the mciSendString API returned.
+        '''     The error number that the mciSendString API returned.
         ''' </summary>
-        ''' <value></value>
-        ''' <returns></returns>
-        ''' <remarks></remarks>
-        Public Property ErrorNumber() As Integer
-            Get
-                Return _errorNumber
-            End Get
-            Set(ByVal value As Integer)
-                _errorNumber = value
-            End Set
-        End Property
+        Public Property ErrorNumber As Integer
 
     End Class
-
 End Namespace

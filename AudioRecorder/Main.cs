@@ -49,7 +49,7 @@ namespace AudioRecorder
         /// <param name="e"></param>
         private void PlaybackTimer_Tick(object sender, EventArgs e)
         {
-            double elapsed = _audioPlayer.Milleseconds / 1000;
+            double elapsed = _audioPlayer.Milliseconds / 1000;
             lblStatus.Text = $"Total Time: {elapsed.ToString().FormatIfNumber(2)} seconds";
             lblBytesInMemory.Text = _audioPlayer.FileSize.ToString().FormatIfNumber(0);
         }

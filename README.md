@@ -1,6 +1,6 @@
 # Basic Audio
 
-[![NuGet version (BasicAudio)](https://img.shields.io/badge/nuget-v2019.4.5.1-blue.svg?style=flat-square)](https://www.nuget.org/packages/BasicAudio/)
+[![NuGet version (BasicAudio)](https://img.shields.io/badge/nuget-v2019.11..1-blue.svg?style=flat-square)](https://www.nuget.org/packages/BasicAudio/)
 [![NuGet version (BasicAudio)](https://img.shields.io/github/license/blakepell/basicaudio.svg?style=flat-square)](https://github.com/blakepell/BasicAudio/blob/master/LICENSE)
 
 Basic audio is a class library with a test project (audio player/recorder) to faciliate basic audio 
@@ -11,7 +11,7 @@ those that just want to incorporate playback/recording with minimal code or lear
 
 If you need advanced recording and audio features I highly recommend [NAudio](https://github.com/naudio/NAudio).
 
-Basic audio was originally written in Visual Basic but is is now built off of C#.  The Visual Basic 
+Basic audio was originally written in Visual Basic but is now built off of C#.  The Visual Basic 
 version has been left in this project for posterity.
 
 The library provides its functionality through the mciSendString Windows API and thus binds it desktop
@@ -32,6 +32,7 @@ that this records through whatever the currently selected recording device is in
 
 ## .Net Framework Support
 
+- .NET Standard 2.1
 - .NET Standard 2.0
 - .NET Standard 1.6
 - .NET Standard 1.5
