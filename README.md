@@ -38,6 +38,7 @@ that this records through whatever the currently selected recording device is in
 - .NET Standard 1.5
 - .NET Standard 1.4
 - .NET Standard 1.3
+- .NET Framework 4.8
 - .NET Framework 4.7.2
 - .NET Framework 4.7.1
 - .NET Framework 4.7
