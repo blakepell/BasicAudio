@@ -1,8 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+ * @author            : Blake Pell
+ * @initial date      : 2007-03-31
+ * @last updated      : 2021-05-02
+ * @copyright         : Copyright (c) 2003-2021, All rights reserved.
+ * @license           : MIT 
+ * @website           : http://www.blakepell.com
+ */
+
+using System;
 
 namespace AudioRecorder.Extensions
 {
@@ -25,10 +30,8 @@ namespace AudioRecorder.Extensions
                 double x = Convert.ToDouble(str);
                 return x.ToString(formatString);
             }
-            else
-            {
-                return str;
-            }
+
+            return str;
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace AudioRecorder.Extensions
         /// <param name="str"></param>
         public static bool IsNumeric(this string str)
         {
-            return decimal.TryParse(str, out decimal result);
+            return decimal.TryParse(str, out decimal _);
         }
 
     }

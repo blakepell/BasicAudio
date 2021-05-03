@@ -8,13 +8,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BasicAudio.VisualBasic", "BasicAudio.VisualBasic\BasicAudio.VisualBasic.vbproj", "{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BasicAudio.VisualBasic", "src\BasicAudio.VisualBasic\BasicAudio.VisualBasic.vbproj", "{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicAudio", "BasicAudio\BasicAudio.csproj", "{B154FC05-4592-4CAC-BDFD-D76E5770432B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicAudio", "src\BasicAudio\BasicAudio.csproj", "{B154FC05-4592-4CAC-BDFD-D76E5770432B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRecorder", "AudioRecorder\AudioRecorder.csproj", "{F3485F6E-1DB6-48F7-9A71-5CB63B963452}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioRecorder", "src\AudioRecorder\AudioRecorder.csproj", "{F3485F6E-1DB6-48F7-9A71-5CB63B963452}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AudioRecorder.VisualBasic", "AudioRecorder.VisualBasic\AudioRecorder.VisualBasic.vbproj", "{AC190BF3-43B6-4BA9-8E35-D74DE759691C}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AudioRecorder.VisualBasic", "src\AudioRecorder.VisualBasic\AudioRecorder.VisualBasic.vbproj", "{AC190BF3-43B6-4BA9-8E35-D74DE759691C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legacy Visual Basic Version", "Legacy Visual Basic Version", "{9460A6D3-9F1D-4BCD-991B-86FE8458C8D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5BDF22B9-DF92-4F0B-83E2-E527A6B74FD6} = {9460A6D3-9F1D-4BCD-991B-86FE8458C8D9}
+		{AC190BF3-43B6-4BA9-8E35-D74DE759691C} = {9460A6D3-9F1D-4BCD-991B-86FE8458C8D9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7B41907-F5BE-4DFE-B7BB-C8B68280AF4E}

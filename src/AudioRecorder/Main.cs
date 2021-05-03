@@ -1,4 +1,13 @@
-﻿using BasicAudio;
+﻿/*
+ * @author            : Blake Pell
+ * @initial date      : 2007-03-31
+ * @last updated      : 2021-05-02
+ * @copyright         : Copyright (c) 2003-2021, All rights reserved.
+ * @license           : MIT 
+ * @website           : http://www.blakepell.com
+ */
+
+using BasicAudio;
 using System;
 using System.Windows.Forms;
 using System.IO;
