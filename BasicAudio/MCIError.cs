@@ -1,25 +1,24 @@
-﻿namespace BasicAudio
+﻿/*
+ * @author            : Blake Pell
+ * @initial date      : 2007-03-31
+ * @last updated      : 2021-05-02
+ * @copyright         : Copyright (c) 2003-2021, All rights reserved.
+ * @license           : MIT 
+ * @website           : http://www.blakepell.com
+ */
+
+namespace BasicAudio
 {
     /// <summary>
-    ///     This is a lookup class to identify the MCI errors that may occur.
+    /// This is a lookup class to identify the MCI errors that may occur.
     /// </summary>
     /// <remarks>
-    ///     There's is an API that will also do this for us, We should consider using that in the future.
+    /// There's is an API that will also do this for us, We should consider using that in the future.
     /// </remarks>
     public class MCIError
     {
-        //*********************************************************************************************************************
-        //
-        //             Class:  MCIError
-        //      Organization:  http://www.blakepell.com
-        //      Initial Date:  03/31/2007
-        //      Last Updated:  11/19/2019
-        //     Programmer(s):  Blake Pell, blakepell@hotmail.com
-        //
-        //*********************************************************************************************************************
-
         /// <summary>
-        ///     The device error enums
+        /// The device error enums
         /// </summary>
         public enum MCIERR
         {
@@ -102,7 +101,7 @@
         }
 
         /// <summary>
-        ///     Constructor
+        /// Constructor
         /// </summary>
         /// <param name="errorNumber"></param>
         public MCIError(int errorNumber)
@@ -111,7 +110,7 @@
         }
 
         /// <summary>
-        ///     Returns the description for the value set in the ErrorNumber property.
+        /// Returns the description for the value set in the ErrorNumber property.
         /// </summary>
         private string ErrorDescription
         {
@@ -278,7 +277,7 @@
         }
 
         /// <summary>
-        ///     The error number that the mciSendString API returned.
+        /// The error number that the mciSendString API returned.
         /// </summary>
         public int ErrorNumber { get; set; }
 

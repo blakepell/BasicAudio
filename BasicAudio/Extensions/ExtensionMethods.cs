@@ -1,30 +1,21 @@
-﻿namespace BasicAudio.Extensions
+﻿/*
+ * @author            : Blake Pell
+ * @initial date      : 2007-03-31
+ * @last updated      : 2021-05-02
+ * @copyright         : Copyright (c) 2003-2021, All rights reserved.
+ * @license           : MIT 
+ * @website           : http://www.blakepell.com
+ */
+
+namespace BasicAudio.Extensions
 {
     /// <summary>
-    ///     Various extension methods used by BasicAudio.
+    /// Various extension methods used by BasicAudio.
     /// </summary>
     public static class ExtensionMethods
     {
-        //*********************************************************************************************************************
-        //
-        //             Class:  StringExtensions
-        //      Organization:  http://www.blakepell.com
-        //     Programmer(s):  Blake Pell, blakepell@hotmail.com
-        //
-        //*********************************************************************************************************************
-
         /// <summary>
-        ///     This function will return the specified amount of characters from the left hand side of the string.  This is the equivalent of the Visual Basic Left function.
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="length"></param>
-        public static string Left(this string str, int length)
-        {
-            return str.Substring(0, length);
-        }
-
-        /// <summary>
-        ///     This function will return the specified amount of characters from the right hand side of the string.  This is the equivalent of the Visual Basic Right function.
+        /// This function will return the specified amount of characters from the right hand side of the string.  This is the equivalent of the Visual Basic Right function.
         /// </summary>
         /// <param name="str"></param>
         /// <param name="length"></param>
@@ -34,40 +25,14 @@
         }
 
         /// <summary>
-        ///     Returns the specified number of characters from the left hand side of the string.  If the number asked for is longer the
-        ///     string then the entire string is returned without an exception.
-        /// </summary>
-        /// <param name="str"></param>
-        /// <param name="length"></param>
-        public static string SafeLeft(this string str, int length)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                return "";
-            }
-
-            if (length >= str.Length)
-            {
-                return str;
-            }
-
-            if (length < 0)
-            {
-                return "";
-            }
-
-            return Left(str, length);
-        }
-
-        /// <summary>
-        ///     Returns the specified number of characters from the right hand side of the string.  If the number asked for is longer the
-        ///     string then the entire string is returned without an exception.
+        /// Returns the specified number of characters from the right hand side of the string.  If the number asked for is longer the
+        /// string then the entire string is returned without an exception.
         /// </summary>
         /// <param name="str"></param>
         /// <param name="length"></param>
         public static string SafeRight(this string str, int length)
         {
-            if (string.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str) || length <= 0)
             {
                 return "";
             }
@@ -75,23 +40,18 @@
             if (length >= str.Length)
             {
                 return str;
-            }
-
-            if (length < 0)
-            {
-                return "";
             }
 
             return Right(str, length);
         }
 
         /// <summary>
-        ///     Determines whether a string is a numeric value.  This implementation uses Decimal.TryParse to produce it's value.
+        /// Determines whether a string is a numeric value.  This implementation uses Decimal.TryParse to produce it's value.
         /// </summary>
         /// <param name="str"></param>
         public static bool IsNumeric(this string str)
         {
-            return decimal.TryParse(str, out decimal result);
+            return decimal.TryParse(str, out decimal _);
         }
     }
 }
