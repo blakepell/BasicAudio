@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <PackageId>BasicAudio</PackageId>
-    <TargetFrameworks>net6.0;net5.0;netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.4;netstandard1.3;net48;net472;net471;net47;net462;net461;net46;net452;net451;net45;net4;net35</TargetFrameworks>
-    <Version>2021.11.9.1</Version>
+    <TargetFrameworks>net7.0;net6.0;net5.0;netstandard2.1;netstandard2.0;netstandard1.3;net48;net472;net462;net4;net35</TargetFrameworks>
+    <Version>2022.11.30.1</Version>
     <Authors>Blake Pell</Authors>
     <Company>http://www.blakepell.com</Company>
     <Description>Basic audio recording for Windows desktop applications.  Although .NET Standard compliant requires Windows API's for audio recording and playback.</Description>
-    <Copyright>Copyright ©  2007-2021</Copyright>
+    <Copyright>Copyright ©  2007-2022</Copyright>
     <PackageProjectUrl>https://github.com/blakepell/BasicAudio</PackageProjectUrl>
     <RepositoryUrl>https://github.com/blakepell/BasicAudio</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

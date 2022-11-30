@@ -34,22 +34,15 @@ that this records through whatever the currently selected recording device is in
 
 ## .Net Framework Support
 
+- .NET 7.0
+- .NET 6.0
+- .NET 5.0
 - .NET Standard 2.1
 - .NET Standard 2.0
-- .NET Standard 1.6
-- .NET Standard 1.5
-- .NET Standard 1.4
 - .NET Standard 1.3
 - .NET Framework 4.8
 - .NET Framework 4.7.2
-- .NET Framework 4.7.1
-- .NET Framework 4.7
 - .NET Framework 4.6.2
-- .NET Framework 4.6.1
-- .NET Framework 4.6
-- .NET Framework 4.5.2
-- .NET Framework 4.5.1
-- .NET Framework 4.5
 - .NET Framework 4
 - .NET Framework 3.5
 
