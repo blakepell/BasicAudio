@@ -34,6 +34,7 @@ that this records through whatever the currently selected recording device is in
 
 ## .Net Framework Support
 
+- .NET 8.0
 - .NET 7.0
 - .NET 6.0
 - .NET 5.0
