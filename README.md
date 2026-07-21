@@ -1,6 +1,6 @@
 # Basic Audio
 
-[![NuGet version (BasicAudio)](https://img.shields.io/badge/nuget-v2022.11.30.1-blue.svg?style=flat-square)](https://www.nuget.org/packages/BasicAudio/)
+[![NuGet version (BasicAudio)](https://img.shields.io/badge/nuget-v2026.7.21.1-blue.svg?style=flat-square)](https://www.nuget.org/packages/BasicAudio/)
 [![NuGet version (BasicAudio)](https://img.shields.io/github/license/blakepell/basicaudio.svg?style=flat-square)](https://github.com/blakepell/BasicAudio/blob/master/LICENSE)
 
 Basic audio is a class library with a test project (audio player/recorder) to faciliate basic audio 
@@ -34,6 +34,7 @@ that this records through whatever the currently selected recording device is in
 
 ## .Net Framework Support
 
+- .NET 10.0
 - .NET 8.0
 - .NET 7.0
 - .NET 6.0
